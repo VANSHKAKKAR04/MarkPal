@@ -1,0 +1,6 @@
+google-api-python-client
+beautifulsoup4
+pinecone
+openai
+requests
+tqdm
