@@ -3,6 +3,7 @@ from scraper.web_scraper import scrape_website
 from database.pinecone_db import store_in_pinecone, store_ad_in_pinecone
 from generator.ad_generator import generate_ad
 
+
 def main():
     product_name = input("Enter product name: ")
     print(f"\n🔍 Searching for relevant websites related to '{product_name}'...")
