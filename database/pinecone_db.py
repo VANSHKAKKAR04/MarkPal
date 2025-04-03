@@ -1,11 +1,10 @@
 from config import (
     PINECONE_API_KEY, 
-    PINECONE_ENV, 
     PINECONE_INDEX_NAME, 
     PINECONE_ADS_INDEX_NAME
 )
 from embeddings.embedding import get_embedding
-from pinecone import Pinecone, ServerlessSpec 
+from pinecone import Pinecone
 
 # Initialize Pinecone client
 pc = Pinecone(api_key=PINECONE_API_KEY)
