@@ -6,10 +6,10 @@ import re
 import pandas as pd
 
 # Sample ad copies
-your_ad = "Discover the future of learning. Personalized AI recommendations just for you. Start your journey today!"
-competitor_ad = "Boost your knowledge with AI-powered tools. Trusted by thousands. Get started now!"
+your_ad = "Are slow apps, weak performance, and battery drain ruining your experience? The trusted iPhone 15 is here to change that. Millions have upgraded and now enjoy proven faster speeds, certified all-day battery life, and secure unmatched reliability. Powered by the proven A16 Bionic chip, even demanding tasks feel effortless, while the certified 48MP camera system captures breathtaking photos and videos with incredible clarity. Say goodbye to battery anxiety—this phone is trusted to last through your busiest days. Designed with "
 
-# Helper functions
+competitor_ad= "The iPhone 15 ushers in a new era of innovation, blending sleek aesthetics with cutting-edge technology to deliver an unparalleled smartphone experience. Designed for creators, tech enthusiasts, and everyday users alike, this device features a revolutionary camera system that captures professtion connectivity, immersive display technology, and intelligent software optimizations, the iPhone 15 redefines what’s"
+
 def get_readability(text):
     return textstat.flesch_reading_ease(text)
 
@@ -72,3 +72,5 @@ comparison_df = pd.DataFrame({
 })
 
 comparison_df.loc[len(comparison_df.index)] = ["Semantic Similarity", similarity_score, similarity_score]
+
+print(comparison_df)
