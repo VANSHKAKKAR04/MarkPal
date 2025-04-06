@@ -9,7 +9,7 @@ def generate_ad(product, force_regenerate=False):
     """
     Generates an ad for a product using Gemini 1.5 Flash based on retrieved reviews.
     Implements Retrieval-Augmented Generation (RAG) with Pinecone.
-    
+    Make sure the Ad has the appropriate trust signals, urgency and call to action 
     Parameters:
       product (str): The product name.
       force_regenerate (bool): If True, regenerates the ad even if one exists.

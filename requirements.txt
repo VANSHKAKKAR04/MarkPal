@@ -4,3 +4,7 @@ pinecone
 openai
 requests
 tqdm
+textblob
+scikit-learn
+textstat
+pandas
