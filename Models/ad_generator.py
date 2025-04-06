@@ -1,6 +1,6 @@
 import google.generativeai as genai
 from config import GEMINI_API_KEY
-from Model.pinecone_db import query_pinecone, store_ad_in_pinecone, query_ad_pinecone
+from Models.pinecone_db import query_pinecone, store_ad_in_pinecone, query_ad_pinecone
 
 # Configure Gemini API
 genai.configure(api_key=GEMINI_API_KEY)

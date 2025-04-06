@@ -1,7 +1,7 @@
-from Model.google_search import google_search
-from Model.web_scraper import scrape_website
-from Model.pinecone_db import store_in_pinecone, store_ad_in_pinecone
-from Model.ad_generator import generate_ad
+from Models.google_search import google_search
+from Models.web_scraper import scrape_website
+from Models.pinecone_db import store_in_pinecone, store_ad_in_pinecone
+from Models.ad_generator import generate_ad
 
 
 def main():
