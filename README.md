@@ -13,15 +13,15 @@ MarkPal is an AI-powered marketing assistant that automates product research, we
 
 ### 1. Clone the Repository
 ```bash
- git clone https://github.com/VANSHKAKKAR04/MarkPal.git
- cd MarkPal
+git clone https://github.com/VANSHKAKKAR04/MarkPal.git
+cd MarkPal
 ```
 
 ### 2. Set Up a Virtual Environment (Optional but Recommended)
 ```bash
 python -m venv venv
 source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate    # On Windows
+venv\Scripts\activate     # On Windows
 ```
 
 ### 3. Install Dependencies
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 
 ### 4. Set Up API Keys
-Create a `.env` file and add the following keys:
+Create a `.env` file and add the following:
 ```
 GEMINI_API_KEY=your_gemini_api_key
 PINECONE_API_KEY=your_pinecone_api_key
@@ -44,23 +44,37 @@ GOOGLE_CX_ID=your_google_cx_id
 ```
 MarkPal/
 │── database/
-│   ├── pinecone_db.py  # Handles Pinecone interactions
+│   └── pinecone_db.py
 │── embeddings/
-│   ├── embedding.py  # Generates vector embeddings
+│   └── embedding.py
 │── generator/
-│   ├── ad_generator.py  # AI-generated ad content
+│   └── ad_generator.py
 │── scraper/
-│   ├── web_scraper.py  # Web scraping logic
+│   └── web_scraper.py
 │── search/
-│   ├── google_search.py  # Fetches search results
-│── main.py  # Entry point for running the application
-│── config.py  # API keys and configurations
-│── requirements.txt  # List of dependencies
-│── README.md  # Documentation
+│   └── google_search.py
+│── modelss/
+│   └── [Flask apps for individual components]
+│── Research/
+│   └── [Jupyter notebooks for ad evaluation and generation]
+│── main.py
+│── config.py
+│── requirements.txt
+│── README.md
 ```
 
+## 📚 Additional Notes
+
+- **Research/**  
+  Contains experimental Jupyter notebooks for ad evaluation and generation tasks. Useful for testing and validating different approaches.
+
+- **modelss/**  
+  Houses individual Flask apps that encapsulate modular functionalities. These are invoked via `main.py`.
+
+- **main.py**  
+  Central entry point to run the application by orchestrating the components in the `modelss` folder.
+
 ## 🚀 Usage
-Run the application using:
 ```bash
 python main.py
 ```
@@ -73,8 +87,7 @@ Follow the prompts to enter a product name, scrape reviews, and generate AI-powe
 - ✅ Integration with more databases for scalable storage.
 
 ## 🤝 Contributing
-Contributions are welcome! Feel free to submit a PR or open an issue for improvements.
+Contributions are welcome! Feel free to submit a PR or open an issue.
 
 ## 📜 License
 This project is licensed under the [MIT License](LICENSE).
-
