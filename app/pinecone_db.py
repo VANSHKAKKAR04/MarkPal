@@ -1,9 +1,9 @@
-from config import (
+from app.config import (
     PINECONE_API_KEY, 
     PINECONE_INDEX_NAME, 
     PINECONE_ADS_INDEX_NAME
 )
-from Models.embedding import get_embedding
+from embedding import get_embedding
 from pinecone import Pinecone
 
 # Initialize Pinecone client
