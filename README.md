@@ -68,7 +68,7 @@ MarkPal/
 - **Research/**  
   Contains experimental Jupyter notebooks for ad evaluation and generation tasks. Useful for testing and validating different approaches.
 
-- **modelss/**  
+- **Models/**  
   Houses individual Flask apps that encapsulate modular functionalities. These are invoked via `main.py`.
 
 - **main.py**  
