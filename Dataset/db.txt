@@ -1,0 +1,3 @@
+Pinecone Vector Database:
+https://app.pinecone.io/organizations/-OLU3Qjep8QlHr8hyTP-/projects/a333095c-6437-41d0-82b8-7264ba551415/indexes/generated-ad/browser
+https://app.pinecone.io/organizations/-OLU3Qjep8QlHr8hyTP-/projects/a333095c-6437-41d0-82b8-7264ba551415/indexes/web-scraped-data/browser

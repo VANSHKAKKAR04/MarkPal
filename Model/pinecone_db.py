@@ -3,7 +3,7 @@ from config import (
     PINECONE_INDEX_NAME, 
     PINECONE_ADS_INDEX_NAME
 )
-from embeddings.embedding import get_embedding
+from Model.embedding import get_embedding
 from pinecone import Pinecone
 
 # Initialize Pinecone client
