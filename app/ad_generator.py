@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from app.config import GEMINI_API_KEY
+from config import GEMINI_API_KEY
 from pinecone_db import query_pinecone, store_ad_in_pinecone, query_ad_pinecone
 
 # Configure Gemini API
@@ -49,20 +49,65 @@ Ensure the ad is engaging, persuasive, and accurately highlights the best aspect
     """
 
     try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(prompt)
+        # Preferred model: try Gemini; some projects or API plans may not support every model name.
+        try:
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            response = model.generate_content(prompt)
+            ad_text = response.text if hasattr(response, "text") else None
+        except Exception:
+            # If the preferred model isn't available for this API version/plan, try a more compatible approach
+            try:
+                model = genai.GenerativeModel("text-bison@001")
+                response = model.generate_content(prompt)
+                ad_text = response.text if hasattr(response, "text") else None
+            except Exception as inner_e:
+                # Re-raise the inner exception to be caught by outer handler and trigger fallback
+                raise inner_e
 
-        ad_text = response.text if hasattr(response, "text") else "⚠️ Failed to generate ad."
+        if not ad_text:
+            raise RuntimeError("Empty response from generative model")
 
-        # Optionally, warn if the generated ad doesn't reference the product name
         if product.lower() not in ad_text.lower():
             print("⚠️ Warning: The generated ad does not appear to mention the product properly.")
 
         # Store the generated ad in Pinecone for future retrieval
         store_ad_in_pinecone(product, ad_text)
-
         return ad_text
 
     except Exception as e:
-        print(f"❌ Gemini API Error: {e}")
-        return "⚠️ An error occurred while generating the ad."
+        print(f"❌ Gemini API Error or unsupported model: {e}")
+        print("⚠️ Falling back to local/template ad generator.")
+        # Local fallback: simple template-based RAG-style generation using retrieved reviews
+        def local_generate_ad(product_name, reviews_list):
+            # Basic heuristics: pick up to 3 strongest review snippets and build a short ad
+            snippets = []
+            if isinstance(reviews_list, str):
+                text = reviews_list
+                # split into sentences and take the first few non-empty ones
+                parts = [s.strip() for s in text.replace('\n', ' ').split('.') if s.strip()]
+                snippets = parts[:3]
+            elif isinstance(reviews_list, list):
+                # take first sentence from each review up to 3
+                for r in reviews_list:
+                    if not r:
+                        continue
+                    s = r.replace('\n', ' ').strip()
+                    # use up to first 200 chars
+                    snippets.append(s[:200])
+                    if len(snippets) >= 3:
+                        break
+
+            # Compose ad
+            headline = f"Try {product_name} — Loved by customers"
+            body = " ".join(snippets) if snippets else f"Discover why customers love {product_name}."
+            cta = "Buy now and enjoy the difference!"
+            ad = f"{headline}\n\n{body}\n\n{cta}"
+            return ad
+
+        # Build fallback ad using reviews_text (string) or reviews list
+        fallback_ad = local_generate_ad(product, reviews)
+        try:
+            store_ad_in_pinecone(product, fallback_ad)
+        except Exception as store_exc:
+            print(f"⚠️ Warning: failed to store ad in Pinecone: {store_exc}")
+        return fallback_ad

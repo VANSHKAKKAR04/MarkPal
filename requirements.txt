@@ -8,3 +8,5 @@ textblob
 scikit-learn
 textstat
 pandas
+dotenv
+genai

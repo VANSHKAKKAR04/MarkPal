@@ -1,4 +1,4 @@
-from app.config import (
+from config import (
     PINECONE_API_KEY, 
     PINECONE_INDEX_NAME, 
     PINECONE_ADS_INDEX_NAME
